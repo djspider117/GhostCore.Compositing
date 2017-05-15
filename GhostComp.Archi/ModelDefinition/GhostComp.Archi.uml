@@ -1,0 +1,370 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<modelStoreModel xmlns:dm0="http://schemas.microsoft.com/VisualStudio/2008/DslTools/Core" xmlns:dm1="http://schemas.microsoft.com/dsltools/Kernel" xmlns:dm2="http://schemas.microsoft.com/dsltools/Component" xmlns:dm3="http://schemas.microsoft.com/dsltools/Activity" xmlns:dm4="http://schemas.microsoft.com/dsltools/Interaction" xmlns:dm5="http://schemas.microsoft.com/dsltools/UseCase" xmlns:dm6="http://schemas.microsoft.com/dsltools/UmlModelLibrary" xmlns:dm7="http://schemas.microsoft.com/dsltools/UmlDiagrams" xmlns:dm8="http://schemas.microsoft.com/dsltools/LogicalClassDesigner"
+  dslVersion="1.0.0.0"
+  Id="83f35b97-7bba-4667-9597-2c64ad92f9f2"
+  name="GhostComp.Archi" xmlns="http://schemas.microsoft.com/dsltools/ModelStore">
+  <ownedCommentsInternal>
+    <comment
+      Id="c6114459-6bf1-4314-b2a6-46e361e5b254">
+      <body>• atop - Shows the shape of image B, with A covering B where the images overlap. Algorithm: Ab+B(1-a)
+• average - The average of the two images. The result is darker than the original images. Algorithm: (A+B)/2
+• color-burn - Image B gets darker based on the luminance of A. Algorithm: darken B towards A
+• color-dodge - Image B gets brighter based on the luminance of A. Algorithm: brighten B towards A
+• conjoint-over - Similar to the over operation, except that if a pixel is partially covered by both a and b, conjoint-over assumes a completely hides b. For instance, two polygons where a and b share some edges but a completely overlaps b. Normal over produces a slightly transparent seam here. Algorithm: A+B(1-a)/b, A if a&gt;b
+• copy - Only shows image A. This is useful if you also set the mix or mask controls so that some of B can still be seen. Algorithm: A
+• difference - How much the pixels differ. See also Absminus. Algorithm: abs(A-B)
+• disjoint-over - Similar to the over operation, except that if a pixel is partially covered by both a and b, disjoint-over assumes the two objects do not overlap. For instance, two polygons that touch and share an edge. Normal over produces a slightly transparent seam here. Algorithm: A+B(1-a)/b, A+B if a+b&lt;1
+• divide - Divides the values but stops two negative values from becoming a positive number. Algorithm: A/B, 0 if A&lt;0 and B&lt;0
+• exclusion - A more photographic form of difference. Algorithm: A+B-2AB
+
+• from - Image A is subtracted from B. Algorithm: B-A
+• geometric - Another way of averaging two images. 
+Algorithm: 2AB/(A+B)
+• hard-light - Image B is lit up by a very bright and sharp light in the shape of image A. Algorithm: multiply if A&lt;.5, screen if A&gt;.5
+• hypot - Resembles the plus and screen operations. The result is not as bright as plus, but brighter than screen. Hypot works with values above 1. Algorithm: diagonal sqrt(A*A+B*B)
+• in - Only shows the areas of image A that overlap with the alpha of B. See also In. Algorithm: Ab
+• mask - This is the reverse of the in operation. Only shows the areas of image B that overlap with the alpha of A. Algorithm: Ba
+• matte - Premultiplied over. Use unpremultiplied images with this operation. See also Matte. 
+Algorithm: Aa+B(1-a) (unpremultiplied over)
+• max - Takes the maximum values of both images. See also Max. Algorithm: max(A,B)
+• min - Takes the minimum values of both images. See also Min. Algorithm: min(A,B)
+• minus - Subtracts B from A. Algorithm: A-B
+• multiply - Multiplies the values but stops two negative values from becoming a positive number. See also Multiply. Algorithm: AB, A if A&lt;0 and B&lt;0
+
+• out - Only shows the areas of image A that do not overlap with the alpha of B. See also Out. Algorithm: A(1-b)
+• over - This is the default operation. Layers image A over B according to the alpha of image A. Algorithm: A+B(1-a)
+• overlay - Image A brightens image B. 
+Algorithm: multiply if B&lt;.5, screen if B&gt;.5
+• plus - The sum of image A and B. Note that the plus algorithm may result in pixel values higher than 1.0. See also Plus. Algorithm: A+B
+• screen - If A or B is less than or equal to 1 the screen, else use the maximum example. Similar to plus. See also Screen. Algorithm: A+B-AB if A and B between 0-1, else A if A&gt;B else B
+• soft-light - Image B is lit up. Similar to hard-light, but not as extreme. Algorithm: B(2A+(B(1-AB))) if AB&lt;1, 2AB otherwise
+• stencil - This is the reverse of the out operation. Only shows the areas of image B that do not overlap with the alpha of A. 
+Algorithm: B(1-a)
+• under - This is the reverse of the over operation. Layers image B over A according to the matte of image B. Algorithm: A(1-b)+B
+• xor - Shows both image A and B where the images do not overlap. Algorithm: A(1-b)+B(1-a)</body>
+    </comment>
+  </ownedCommentsInternal>
+  <profileInstances>
+    <packageHasProfileInstances
+      Id="0caec977-1f8c-4ba3-a7db-8cc9ad9cc73b">
+      <profileInstance
+        Id="e34d544e-0fea-4ed6-ac5e-1b74119ac791"
+        name="StandardProfileL2" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="29349502-908c-4fda-9054-c48619c59ed0">
+      <profileInstance
+        Id="532ea607-fb19-44b8-8502-3351b05452be"
+        name="StandardProfileL3" />
+    </packageHasProfileInstances>
+    <packageHasProfileInstances
+      Id="b900b5be-bced-41eb-9cdf-17625222a712">
+      <profileInstance
+        Id="3c381ecd-7490-4e38-9402-a102e1b2dabb"
+        name="TextTemplateBindings" />
+    </packageHasProfileInstances>
+  </profileInstances>
+  <packagedElements>
+    <packageHasNamedElement>
+      <Interface
+        Id="b08bd7f1-fb30-43eb-9d2c-918b450a724a"
+        name="ICompNode"
+        isAbstract="false"
+        isLeaf="false">
+        <generalsInternal>
+          <generalization
+            Id="982fc670-3d8f-48ba-a5ea-352ad0c3d4f9"
+            isSubstitutable="false">
+            <interfaceMoniker
+              Id="a8032ec0-cd18-4af3-aa4e-5a4dc9162110"
+              LastKnownName="IInputNode"
+              LastKnownLocation="Package_1538.uml" />
+          </generalization>
+        </generalsInternal>
+        <ownedAttributes>
+          <property
+            Id="21341719-1354-46d9-aeb3-aab13c3c960d"
+            name="Name"
+            isLeaf="false"
+            isStatic="false"
+            isReadOnly="false"
+            isUnique="false"
+            isDerived="false"
+            isDerivedUnion="false"
+            aggregation="None"
+            isComposite="false">
+            <type_NamedElement>
+              <undefinedTypeMoniker
+                Id="d918f294-fc1f-4067-8f6e-2332cd4f62ef"
+                LastKnownName="string"
+                LastKnownLocation="GhostComp.Archi.uml" />
+            </type_NamedElement>
+          </property>
+        </ownedAttributes>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="936d90b9-4310-4ece-a5c1-d2c6933fa92b"
+        name="INode"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="666ee3dd-ac68-44eb-8f52-ae060584cf77"
+        name="int" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="3a9eeafa-3989-4903-b42d-c89f48284f7d"
+        name="byte*" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="63eb4a59-0511-4590-9e3e-9f145a869973"
+        name="float" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="2341d6ed-2d5c-4515-95fb-8a837abf80b3"
+        name="IList&lt;IOutputNode&gt;" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="4ffd36a9-bb2b-4ee3-9411-19c0236ef2a7"
+        name="bool" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="d918f294-fc1f-4067-8f6e-2332cd4f62ef"
+        name="string" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="6a116dc2-7883-4cce-8da5-24fe704dde1a"
+        name="Rect" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <packageMoniker
+        Id="424722c4-3d5a-4a1d-9a15-dfbb8c49d656"
+        LastKnownName="GhostCore.Compositing"
+        LastKnownLocation="Package_1538.uml" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="523ce440-3ab0-49b1-b4f4-6a9543809159"
+        name="MergeAlgorithms"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="1d32bead-a58c-4e60-a2b3-47994da7057d"
+        name="IMergeAlgorithm"
+        isAbstract="false"
+        isLeaf="false">
+        <ownedOperations>
+          <operation
+            Id="6442f8c8-4d74-4cae-9e9b-99fabea5b930"
+            name="CalculatePixel"
+            isLeaf="false"
+            isStatic="false"
+            isAbstract="true"
+            concurrency="Sequential"
+            isQuery="false">
+            <ownedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="81c27555-c03f-4e62-9370-e4cf263b0424"
+                  name="A"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="219a29e6-c17b-4c1b-ba9d-73f156c7e07c"
+                      LastKnownName="RGB"
+                      LastKnownLocation="GhostComp.Archi.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="31910b18-19c1-4156-8898-86dda1384b8d"
+                  name="a"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="63eb4a59-0511-4590-9e3e-9f145a869973"
+                      LastKnownName="float"
+                      LastKnownLocation="GhostComp.Archi.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="cb70d36a-6cd0-4ff4-a0e3-66ac99a35bdf"
+                  name="B"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="219a29e6-c17b-4c1b-ba9d-73f156c7e07c"
+                      LastKnownName="RGB"
+                      LastKnownLocation="GhostComp.Archi.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d3cf0447-f761-44ca-b12e-b36857171954"
+                  name="b"
+                  direction="In"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="63eb4a59-0511-4590-9e3e-9f145a869973"
+                      LastKnownName="float"
+                      LastKnownLocation="GhostComp.Archi.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+              <operationHasOwnedParameters>
+                <parameter
+                  Id="d073f32b-db60-4d6a-bd1d-0de779c3a0b8"
+                  direction="Return"
+                  isUnique="false">
+                  <type_NamedElement>
+                    <undefinedTypeMoniker
+                      Id="47ffe655-6ea3-4692-8b87-f4e7d892f2d6"
+                      LastKnownName="RGBA"
+                      LastKnownLocation="GhostComp.Archi.uml" />
+                  </type_NamedElement>
+                </parameter>
+              </operationHasOwnedParameters>
+            </ownedParameters>
+          </operation>
+        </ownedOperations>
+      </Interface>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="219a29e6-c17b-4c1b-ba9d-73f156c7e07c"
+        name="RGB" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="47ffe655-6ea3-4692-8b87-f4e7d892f2d6"
+        name="RGBA" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <Interface
+        Id="1b29fc6d-8c15-4136-adbc-fc72fc990c80"
+        name="Interface1"
+        isAbstract="false"
+        isLeaf="false" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <class
+        Id="160e5fb8-743f-4d10-b046-30c804053a9d"
+        name="Connector"
+        isAbstract="false"
+        isLeaf="false"
+        isActiveClass="false">
+        <appliedStereotypesInternal>
+          <stereotypeInstance
+            Id="84fc8b7e-37a7-4ee8-9f34-a288be6a8669"
+            name="TextTemplateBindings"
+            profile="TextTemplateBindings">
+            <propertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="138e1d28-1687-4e32-8afe-0afea7600c73">
+                <propertyInstance
+                  Id="7d407881-8832-46d1-a53d-ff3d398e54cd"
+                  name="Alias" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="9d8bac8f-f9f7-4232-9869-789648338e6f">
+                <propertyInstance
+                  Id="b817ea17-4272-4672-ad61-a254c3f6cd13"
+                  name="TemplateFilePath" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7f9e99b7-09c1-41eb-9698-cab1ee6de430">
+                <propertyInstance
+                  Id="1c46dedd-77bf-4771-a9d6-21f100dba61f"
+                  name="ProjectPath" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="d126391a-4bc8-4916-a734-d02362c82106">
+                <propertyInstance
+                  Id="e977b7d1-c150-488a-84e2-009aef787f91"
+                  name="TargetDirectory" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="e6d639e1-eeab-4a52-9ab0-15330b773c35">
+                <propertyInstance
+                  Id="79197d29-10f1-460f-953a-51f9fdf45289"
+                  name="TargetName" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7f92b128-7554-4c0a-b91e-95e9217c8456">
+                <propertyInstance
+                  Id="a4bac5a9-2af3-40bf-91ae-a12eb44161d2"
+                  name="Overwrite" />
+              </stereotypeInstanceHasPropertyInstances>
+              <stereotypeInstanceHasPropertyInstances
+                Id="7f6200e3-0a51-481e-8b55-82b1ce3fe1ff">
+                <propertyInstance
+                  Id="3d485e09-464c-43aa-b09c-e6fba04ceeba"
+                  name="Parameters" />
+              </stereotypeInstanceHasPropertyInstances>
+            </propertyInstances>
+          </stereotypeInstance>
+        </appliedStereotypesInternal>
+      </class>
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="ded7cd63-e05c-4e54-9e33-31901c1bc398"
+        name="IInputNode" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="d9449fb4-1236-4906-9fd0-ec9e9a6aeeb7"
+        name="IOutputNode" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="64e1536e-2d2e-4cee-8e4a-625579c64385"
+        name="IIMultiInputNode" />
+    </packageHasNamedElement>
+    <packageHasNamedElement>
+      <undefinedType
+        Id="005ad6b3-9718-45a9-8717-8830e7a7dcf5"
+        name="IMultiInputNode" />
+    </packageHasNamedElement>
+  </packagedElements>
+  <primitiveType
+    Id="220a3521-e091-4221-bae9-3ef9018e845c"
+    name="Integer"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="8943dc84-709e-4f62-b15a-a3273aa6f165"
+    name="Boolean"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="59259974-6d55-42c6-b7bd-763d77ac8ef9"
+    name="String"
+    isAbstract="false"
+    isLeaf="false" />
+  <primitiveType
+    Id="3ab42e7d-4969-445a-b209-471f5cb8209c"
+    name="UnlimitedNatural"
+    isAbstract="false"
+    isLeaf="false" />
+</modelStoreModel>
